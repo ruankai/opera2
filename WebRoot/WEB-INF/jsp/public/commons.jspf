@@ -1,0 +1,11 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld" %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="${pageContext.request.contextPath}/scripts/jquery.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/scripts/pageCommon.js" charset="utf-8"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/scripts/PageUtils.js" charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/pageCommon.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css"></link>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css"></link>
+<script type="text/javascript">
+</script>

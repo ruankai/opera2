@@ -1,0 +1,69 @@
+#main {
+	background-color: white;
+}
+
+#main-left {
+	width: 190px;
+	float: left;
+	min-height: 364px;
+	background-color: white;
+}
+
+#main-right {
+	width: 217px;
+	float: left;
+	min-height: 364px;
+	background-color: white;	
+}
+
+#main-middle {
+	width: 592px;
+	background-color: white;
+	float: left;
+	min-height: 364px;	
+}
+
+#bigtitle {
+	margin-top: 50px;
+	font-size: 30px;
+}
+
+#loginbox {
+	padding-top: 35px;
+	text-align: left;
+	padding-left: 81px;
+}
+
+#username {
+	padding-top: 16px;
+}
+
+#password {
+	padding-top: 16px;
+}
+
+.logintitle {
+	background-position: 0px 8px;
+	padding-left: 58px;
+	background-repeat: no-repeat;
+	width: 110px;
+	display: block;
+	float: left;
+	clear: both;	
+}
+
+#passwordtext, #usernametext {
+	width: 130px;	
+}
+
+#login {
+	padding-top: 16px;	
+}
+
+#login input {
+	width: 61px;	
+}
+
+#loginbtn {
+	margin-left: 130px;	
+}

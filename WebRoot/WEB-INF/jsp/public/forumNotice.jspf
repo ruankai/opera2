@@ -1,0 +1,8 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<marquee scrollAmount=3 height=20 width=100% >
+<a style=color:#FF0000>
+【公告】这里是广东粤剧平台，请遵守相关法律法规，友善发言！
+</a>
+</marquee>

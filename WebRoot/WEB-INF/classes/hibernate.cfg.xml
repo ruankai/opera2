@@ -1,0 +1,47 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+
+	<!-- 1.数据库连接信息 -->
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5InnoDBDialect
+	</property>
+	<!--  
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql:///hsxoa</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">123456</property>
+	-->
+
+	<!-- 2.其他配置 -->
+	<!-- 显示和格式化sql语句 -->
+	<property name="show_sql">true</property>
+	<property name="format_sql">true</property>
+	<!-- 自动创建数据库表 -->
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- 3.导入映射文件 -->
+	<mapping resource="com/org/opera/domain/FileLog.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Forum.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Manager.hbm.xml" />
+	<mapping resource="com/org/opera/domain/MinrenInfo.hbm.xml" />
+	<mapping resource="com/org/opera/domain/News.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Photo.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Reply.hbm.xml" />
+	<mapping resource="com/org/opera/domain/SihuojuInfo.hbm.xml" />
+	<mapping resource="com/org/opera/domain/SihuojuJoin.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Song.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Text.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Topic.hbm.xml" />
+	<mapping resource="com/org/opera/domain/User.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Video.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Vip.hbm.xml" />
+	<mapping resource="com/org/opera/domain/OtherPhoto.hbm.xml" />
+	<mapping resource="com/org/opera/domain/Course.hbm.xml" />
+
+
+</session-factory>
+</hibernate-configuration>

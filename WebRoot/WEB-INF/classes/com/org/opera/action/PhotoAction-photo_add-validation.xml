@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Struts 2配置文件的DTD信息 -->
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<!-- 校验规则文件的根元素 -->
+<validators>
+	<!-- 校验name属性 -->
+	<field name="photographer">
+		<!-- 使用表达式校验器校验photographer属性 -->
+		<field-validator type="requiredstring">
+			<!-- 指定photographer属性必填 -->
+			<message>拍摄者不能为空！</message>
+		</field-validator>
+	</field>
+	<field name="copyright">
+		<!-- 使用表达式校验器校验copyright属性 -->
+		<field-validator type="requiredstring">
+			<!-- 指定copyright属性必填 -->
+			<message>版权所属不能为空！</message>
+		</field-validator>
+	</field>
+</validators>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="default" location="725,165" size="525,2030">
+    <action name="user-*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="user-{1}.jsp" />
+      </result>
+      <result name="ajax-success" />
+    </action>
+    <action name="vip-*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="vip-{1}.jsp" />
+      </result>
+      <result name="ajax-success" />
+    </action>
+    <action name="manager-*" location="0,0" size="0,0">
+      <result name="loginError">
+        <resourceEdge source="loginError" routing="0" target="login.jsp" />
+      </result>
+      <result name="loginSuccess">
+        <resourceEdge source="loginSuccess" routing="0" target="mainpage.jsp" />
+      </result>
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="manager-{1}.jsp" />
+      </result>
+      <result name="ajax-success" />
+      <result name="saveUI">
+        <resourceEdge source="saveUI" routing="0" target="manager-saveUI.jsp" />
+      </result>
+      <result name="toList" />
+      <result name="updatepwd">
+        <resourceEdge source="updatepwd" routing="0" target="manager-updatepwd.jsp" />
+      </result>
+      <result name="updatePwdSuccess">
+        <resourceEdge source="updatePwdSuccess" routing="0" target="mainpage.jsp" />
+      </result>
+      <result name="updatePwdError">
+        <resourceEdge source="updatePwdError" routing="0" target="manager-updatepwd.jsp" />
+      </result>
+      <result name="toLogin">
+        <resourceEdge source="toLogin" routing="0" target="login.jsp" />
+      </result>
+    </action>
+    <action name="news_*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="news_{1}.jsp" />
+      </result>
+      <result name="toList" />
+      <result name="saveUI">
+        <resourceEdge source="saveUI" routing="0" target="news_saveUI.jsp" />
+      </result>
+      <result name="ajax-success" />
+    </action>
+    <action name="text_*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="{1}.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="addUI.jsp" />
+      </result>
+      <result name="toList" />
+      <result name="addUI">
+        <resourceEdge source="addUI" routing="0" target="addUI.jsp" />
+      </result>
+      <result name="editUI">
+        <resourceEdge source="editUI" routing="0" target="editUI.jsp" />
+      </result>
+    </action>
+    <action name="photo_*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="{1}.jsp" />
+      </result>
+      <result name="toList" />
+      <result name="addUI">
+        <resourceEdge source="addUI" routing="0" target="addUI.jsp" />
+      </result>
+      <result name="editUI">
+        <resourceEdge source="editUI" routing="0" target="editUI.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="addUI.jsp" />
+      </result>
+    </action>
+    <action name="song_*" location="0,0" size="0,0">
+      <result name="{1}">
+        <resourceEdge source="{1}" routing="0" target="{1}.jsp" />
+      </result>
+      <result name="toList" />
+      <result name="addUI">
+        <resourceEdge source="addUI" routing="0" target="addUI.jsp" />
+      </result>
+      <result name="editUI">
+        <resourceEdge source="editUI" routing="0" target="editUI.jsp" />
+      </result>
+      <result name="input">
+        <resourceEdge source="input" routing="0" target="addUI.jsp" />
+      </result>
+    </action>
+  </package>
+  <webResource name="manager_{1}.jsp" path="/WEB-INF/jsp/managerAction/manager_{1}.jsp" location="1313,255" size="150,55" />
+  <webResource name="manager_indexUI.jsp" path="/WEB-INF/jsp/managerAction/manager_indexUI.jsp" location="949,10" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="10,1270" size="150,55" />
+  <webResource name="user_{1}.jsp" path="/WEB-INF/jsp/userAction/user_{1}.jsp" location="1305,605" size="150,55" />
+  <webResource name="user_registerUI.jsp" path="/WEB-INF/jsp/userAction/user_registerUI.jsp" location="1319,430" size="150,55" />
+  <webResource name="imgUser_url.jsp" path="/WEB-INF/jsp/imgUserAction/imgUser_url.jsp" location="1631,815" size="150,55" />
+  <webResource name="user_register.jsp" path="/WEB-INF/jsp/userAction/user_register.jsp" location="1290,920" size="150,55" />
+  <webResource name="news_{1}.jsp" path="/WEB-INF/jsp/newsAction/news_{1}.jsp" location="1301,1410" size="150,55" />
+  <webResource name="news_show.jsp" path="/WEB-INF/jsp/newsAction/news_show.jsp" location="1609,1270" size="150,55" />
+  <webResource name="news_saveUI.jsp" path="/WEB-INF/jsp/newsAction/news_saveUI.jsp" location="1289,1130" size="150,55" />
+  <webResource name="info_{1}.jsp" path="/WEB-INF/jsp/infoAction/info_{1}.jsp" location="993,2250" size="150,55" />
+  <webResource name="info_show.jsp" path="/WEB-INF/jsp/infoAction/info_show.jsp" location="111,1655" size="150,55" />
+  <webResource name="info_saveUI.jsp" path="/WEB-INF/jsp/infoAction/info_saveUI.jsp" location="1296,1655" size="150,55" />
+  <webResource name="img_{1}.jsp" path="/WEB-INF/jsp/imgAction/img_{1}.jsp" location="433,1795" size="150,55" />
+  <webResource name="img_showBack.jsp" path="/WEB-INF/jsp/imgAction/img_showBack.jsp" location="412,1970" size="150,55" />
+  <webResource name="login.jsp" path="/WEB-INF/jsp/public/login.jsp" location="0,0" size="0,0" />
+  <webResource name="mainpage.jsp" path="/WEB-INF/jsp/public/mainpage.jsp" location="0,0" size="0,0" />
+  <webResource name="manager-{1}.jsp" path="/WEB-INF/jsp/uservipmanagerAction/manager-{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="user-{1}.jsp" path="/WEB-INF/jsp/uservipmanagerAction/user-{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="vip-{1}.jsp" path="/WEB-INF/jsp/uservipmanagerAction/vip-{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="manager-saveUI.jsp" path="/WEB-INF/jsp/uservipmanagerAction/manager-saveUI.jsp" location="0,0" size="0,0" />
+  <webResource name="manager-updatepwd.jsp" path="/WEB-INF/jsp/uservipmanagerAction/manager-updatepwd.jsp" location="0,0" size="0,0" />
+  <webResource name="{1}.jsp" path="/WEB-INF/jsp/textAction/{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="addUI.jsp" path="/WEB-INF/jsp/textAction/addUI.jsp" location="0,0" size="0,0" />
+  <webResource name="editUI.jsp" path="/WEB-INF/jsp/textAction/editUI.jsp" location="0,0" size="0,0" />
+  <webResource name="{1}.jsp" path="/WEB-INF/content/photoAction/{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="addUI.jsp" path="/WEB-INF/content/photoAction/addUI.jsp" location="0,0" size="0,0" />
+  <webResource name="editUI.jsp" path="/WEB-INF/content/photoAction/editUI.jsp" location="0,0" size="0,0" />
+  <webResource name="addUI.jsp" path="//WEB-INF/content/photoAction/addUI.jsp" location="0,0" size="0,0" />
+  <webResource name="{1}.jsp" path="/WEB-INF/content/songAction/{1}.jsp" location="0,0" size="0,0" />
+  <webResource name="addUI.jsp" path="/WEB-INF/content/songAction/addUI.jsp" location="0,0" size="0,0" />
+  <webResource name="editUI.jsp" path="/WEB-INF/content/songAction/editUI.jsp" location="0,0" size="0,0" />
+  <webResource name="addUI.jsp" path="//WEB-INF/content/songAction/addUI.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

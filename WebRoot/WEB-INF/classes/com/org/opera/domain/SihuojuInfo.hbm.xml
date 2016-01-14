@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.org.opera.domain">
+
+	<class name="SihuojuInfo" table="sihuojuinfo">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="place" />
+		<property name="description" type="text" length="65536"/>
+		<property name="firstTime" type="timestamp" />
+		<property name="type" />
+		<property name="count" />
+		
+		<!-- user属性，本类与User多对一-->
+		<many-to-one name="user" class="User" column="userId"></many-to-one>
+		
+		
+		<!-- joins属性，本类与SihuojuJoin的一对多-->
+		<set name="joins" cascade="delete">
+			<key column="sihuojuinfoId"></key>
+			<one-to-many class="SihuojuJoin"/>
+		</set>
+		
+	</class>
+
+</hibernate-mapping>

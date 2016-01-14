@@ -1,0 +1,29 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<body>
+
+<div id="wraper">
+	<jsp:include page="/WEB-INF/jsp/public/head.jsp"></jsp:include>
+	<div id="main">
+	<jsp:include page="/WEB-INF/jsp/public/main-left.jsp"></jsp:include>
+	<div id="main-right">
+	<center>
+	
+	<!-- 填充内容 -->
+	<s:form action="topic_search">
+&nbsp;
+<s:textfield name="content" value="搜索相关主题..." style="color:gray;" ></s:textfield> 
+<s:submit  value="搜索"></s:submit>
+</s:form>
+	
+   	<div>
+   	<a href="javascript:history.go(-1);"><img src="${pageContext.request.contextPath}/style/images/goBack.png"/></a>
+    </div>
+	</center>
+	</div>
+	</div>
+	<jsp:include page="/WEB-INF/jsp/public/foot.jsp"></jsp:include>
+	</div>
+
+
+</body>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.org.opera.domain">
+
+	<class name="SihuojuJoin" table="sihuojujoin">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="type" />
+		
+		
+		<!-- user属性，本类与User多对一-->
+		<many-to-one name="user" class="User" column="userId"></many-to-one>
+		
+		<!-- sihuojuinfo属性，本类与SihuojuInfo多对一-->
+		<many-to-one name="sihuojuinfo" class="SihuojuInfo" column="sihuojuinfoId" cascade="delete"></many-to-one>
+		
+	</class>
+
+</hibernate-mapping>

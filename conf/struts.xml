@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<!-- 配置为开发模式（配置了开发模式，不需要重新发布，立即生效） -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 把扩展名配置为action -->
+    <constant name="struts.action.extension" value="action"></constant>
+	<!-- 把主题配置为simple(设置为自己的主题，比如：表单不会自动的生成为表格的形式) -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 国际化文件 -->
+	<constant name="struts.custom.i18n.resources" value="mess"/>
+	<!-- 视频、音频和照片允许上传的大小 -->
+	<constant name="struts.multipart.maxSize" value="1000000000"/> 
+
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- 用户管理 -->
+    	<action name="user-*" class="userAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/user-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	<!-- VIP管理 -->
+    	<action name="vip-*" class="vipAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/vip-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	<!-- 管理员管理 -->
+    	<action name="manager-*" class="managerAction" method="{1}">
+        	<result name="loginError">/WEB-INF/jsp/public/login.jsp</result>
+        	<result name="loginSuccess">/WEB-INF/jsp/public/mainpage.jsp</result>
+        	<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/manager-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<result name="saveUI">/WEB-INF/jsp/uservipmanagerAction/manager-saveUI.jsp</result>
+      	 	<result name="toList" type="redirectAction">/manager-listpart?pageNow=${pageNow}</result>
+    		<result name="updatepwd">/WEB-INF/jsp/uservipmanagerAction/manager-updatepwd.jsp</result>
+    		<result name="updatePwdSuccess">/WEB-INF/jsp/public/mainpage.jsp</result>
+    		<result name="updatePwdError">/WEB-INF/jsp/uservipmanagerAction/manager-updatepwd.jsp</result>
+    		<result name="toLogin">/WEB-INF/jsp/public/login.jsp</result>
+    	</action>
+    	
+    	<!-- 新闻管理 -->
+    	<action name="news_*" class="newsAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/newsAction/news_{1}.jsp</result>
+         	<result name="toList" type="redirectAction">/news_listNewsBack?pageNow=${pageNow}</result>
+    		<result name="saveUI">/WEB-INF/jsp/newsAction/news_saveUI.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	
+    	<!-- 当Struts2与Spring整合后，class属性可以写bean的名称 -->
+		<action name="text_*" class="textAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/textAction/{1}.jsp</result>
+			<result name="input">/WEB-INF/jsp/textAction/addUI.jsp</result>
+			<result name="toList" type="redirectAction">text_list?currentPage=${currentPage}</result>
+        </action>
+        
+		<!-- 图片管理-->
+			<action name="photo_*" class="photoAction" method="{1}">
+			<!-- 配置fileUpload的拦截器 -->
+			<interceptor-ref name="fileUpload">
+				<!-- 配置允许上传的文件类型 -->
+				<param name="allowedTypes">
+				image/png,image/gif,image/jpeg
+				</param>
+				<!-- 配置允许上传的文件大小 -->
+				<param name="maximumSize">5*1024*1024</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
+			<param name="savePath">/upload/photo</param>
+			<result name="{1}">/WEB-INF/jsp/photoAction/{1}.jsp</result>
+			<result name="toList" type="redirectAction">photo_list?currentPage=${currentPage}</result>
+        	<result name="input">//WEB-INF/jsp/photoAction/addUI.jsp</result>
+        </action>
+        
+        <action name="video_*" class="videoAction" method="{1}">
+        <!-- <interceptor-ref name="fileUpload">
+        	配置允许上传的文件类型
+        	<param name=""></param>
+        </interceptor-ref> -->
+        <param name="savePath">/upload/video</param>
+        	<result name="{1}">/WEB-INF/jsp/videoAction/{1}.jsp</result>
+        	<result name="toList" type="redirectAction">video_list?currentPage=${currentPage}</result>
+        	<result name="input">//WEB-INF/jsp/videoAction/addUI.jsp</result>
+        </action>
+          <action name="song_*" class="songAction" method="{1}">
+        <!-- <interceptor-ref name="fileUpload">
+        	配置允许上传的文件类型
+        	<param name=""></param>
+        </interceptor-ref> -->
+        <param name="savePath">/upload/song</param>
+        	<result name="{1}">/WEB-INF/jsp/songAction/{1}.jsp</result>
+        	<result name="toList" type="redirectAction">song_list?currentPage=${currentPage}</result>
+        	<result name="input">//WEB-INF/jsp/songAction/addUI.jsp</result>
+        </action>
+        	
+    	<!-- 论坛：版块管理 -->
+		<action name="forumManage_*" class="forumManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/forumManageAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/forumManageAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">forumManage_list</result>
+		</action>
+
+	
+		<!-- 论坛：版块相关功能 -->
+		<action name="forum_*" class="forumAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/forumAction/list.jsp</result>
+			<result name="show">/WEB-INF/jsp/forumAction/show.jsp</result>
+			<result name="moveUI">/WEB-INF/jsp/forumAction/moveUI.jsp</result>
+			<result name="move" type="redirectAction">forum_list</result>
+		</action>
+		<!-- 论坛：主题相关功能 -->
+		<action name="topic_*" class="topicAction" method="{1}">
+			<result name="show">/WEB-INF/jsp/topicAction/show.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/topicAction/addUI.jsp</result>
+			<result name="toShow" type="redirectAction">topic_show?id=${id}</result>
+			<result name="changeType" type="redirectAction">topic_show?id=${topicId}</result>
+			<result name="search">/WEB-INF/jsp/forumAction/forumSearch.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/topicAction/editUI.jsp</result>
+			<result name="edit" type="redirectAction">topic_show?id=${topicId}</result>
+		</action>
+		<!-- 论坛：回复相关功能 -->
+		<action name="reply_*" class="replyAction" method="{1}">
+			<result name="addUI">/WEB-INF/jsp/replyAction/addUI.jsp</result>
+			<result name="toTopicShow" type="redirectAction">topic_show?id=${topicId}</result>
+		</action>
+
+		<!-- 私伙局：活动信息 -->
+		<action name="info_*" class="sihuojuInfoAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/sihuojuInfoAction/list.jsp</result>
+			<result name="show">/WEB-INF/jsp/sihuojuInfoAction/show.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/sihuojuInfoAction/addUI.jsp</result>
+			<result name="add" type="redirectAction">info_list</result>
+			<result name="auditList">/WEB-INF/jsp/sihuojuInfoAction/auditList.jsp</result>
+			<result name="listBack">/WEB-INF/jsp/sihuojuInfoAction/listBack.jsp</result>
+			<result name="showBack">/WEB-INF/jsp/sihuojuInfoAction/showBack.jsp</result>
+			<result name="deleteBack" type="redirectAction">info_listBack</result>
+			<result name="showJoin">/WEB-INF/jsp/sihuojuInfoAction/showJoin.jsp</result>
+			<result name="auditShow">/WEB-INF/jsp/sihuojuInfoAction/auditShow.jsp</result>
+		</action>
+		
+		<!-- 私伙局：人员信息 -->
+		<action name="join_*" class="sihuojuJoinAction" method="{1}">
+			<result name="join" type="redirectAction">info_list</result>
+			<result name="joinType" type="redirectAction">info_auditShow?infoId=${testId}</result>
+			<result name="peopleBack">/WEB-INF/jsp/sihuojuJoinAction/peopleBack.jsp</result>
+		</action>
+	
+		<!-- 名人堂：名人信息 -->
+		<action name="minren_*" class="minrenInfoAction" method="{1}">
+			<result name="list" >/WEB-INF/jsp/minrenInfoAction/list.jsp</result>
+			<result name="show" >/WEB-INF/jsp/minrenInfoAction/show.jsp</result>
+			<result name="listBack" >/WEB-INF/jsp/minrenInfoAction/listBack.jsp</result>
+			<result name="addUI" >/WEB-INF/jsp/minrenInfoAction/addUI.jsp</result>
+			<result name="add" type="redirectAction">minren_list</result>
+			<result name="deleteBack" type="redirectAction">minren_listBack</result>
+		</action>
+    	
+    	<!-- 微课程 -->
+		<action name="course_*" class="courseAction" method="{1}">
+			<result name="list" >/WEB-INF/jsp/courseAction/list.jsp</result>
+			<result name="show" >/WEB-INF/jsp/courseAction/show.jsp</result>
+			<result name="addUI" >/WEB-INF/jsp/courseAction/addUI.jsp</result>
+			<result name="add" type="redirectAction">course_listMy</result>
+			<result name="search">/WEB-INF/jsp/courseAction/search.jsp</result>
+			<result name="listMy">/WEB-INF/jsp/courseAction/listMy.jsp</result>
+			<result name="auditUI" >/WEB-INF/jsp/courseAction/auditUI.jsp</result>
+			<result name="audit" type="redirectAction">course_listMy</result>
+			<result name="delete" type="redirectAction">course_listMy</result>
+			<result name="random" type="redirectAction">course_show?courseId=${randomCount}</result>
+			<result name="listBack" >/WEB-INF/jsp/courseAction/listBack.jsp</result>
+			<result name="deleteBack" type="redirectAction">course_listBack</result>
+			<result name="test" >/WEB-INF/jsp/courseAction/test.jsp</result>
+		</action>
+    	
+    </package>
+    
+    <package name="app" namespace="/app" extends="json-default">
+    	
+    	<!--  <action name="user_login" class="userAppAction" method="login">
+    	<result type="json">
+    		指定将被Struts2序列化的属性，该属性必须在Action中有对应的getter方法
+    		<param name="root">user</param>
+    	</result>
+    	</action> -->
+    	 <action name="user_login" class="userAppAction" method="login">
+    	</action>
+    	<!-- 以下配置 把anction当做Servlet来使用-->
+    	<action name="user_getMemInfo" class="userAppAction" method="getMemInfo">
+    	</action>
+    	<action name="user_register" class="userAppAction" method="register">   	
+    	</action>
+    	<action name="user_forgotpwd" class="userAppAction" method="forgotpwd">   	
+    	</action>
+    	<action name="user_upGrade" class="userAppAction" method="upGrade">   	
+    	</action>
+    	<action name="user_memInfo" class="userAppAction" method="memInfo">   	
+    	</action>
+    	<!--以上  -->
+    	<action name="vip_login" class="vipAppAction" method="login">
+    	</action>
+    	<action name="vip_forgotpwd" class="vipAppAction" method="forgotpwd">
+    	</action>
+    	<action name="vip_memInfo" class="vipAppAction" method="memInfo">
+    	</action>
+    	<action name="photo_list" class="photoAppAction" method="list">
+    	<result type="json">
+    		<!-- 指定将被Struts2序列化的属性，该属性必须在Action中有对应的getter方法 -->
+    		<param name="root">photoList</param>
+    	</result>
+    	</action>
+    	 <action name="photo_add" class="photoAppAction" method="add">
+    	</action>
+    	<action name="video_list" class="videoAppAction" method="list">
+    		<result type="json">
+    		<param name="root">videoList</param>
+    		</result>
+    	</action>
+    	<action name="song_list" class="songAppAction" method="list">
+    		<result type="json">
+    			<param name="root">songList</param>
+    		</result>
+    	</action>
+    </package>
+
+</struts>

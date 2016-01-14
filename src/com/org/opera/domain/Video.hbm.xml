@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.org.opera.domain">
+	<!-- 映射Video持久化类 -->
+	<class name="Video" table="video">
+		
+		<id name="videoId" column="videoId">
+			<!-- 定义主键生成器策略 -->
+			<generator class="native"/>
+		</id>
+		<!-- 用于映射普通属性 -->
+		<property name="photographer" not-null="true"/>
+		<property name="date" type="timestamp" not-null="true"/>
+		<property name="copyright" not-null="true"/>
+		<property name="format" not-null="true"/>
+		<property name="size" not-null="true"/>
+		<property name="keyword"/>
+		<property name="description" type="text" length="5000"/>
+		<property name="video" not-null="true"/>
+		<property name="initiateName" not-null="true"/>
+		<property name="uploadName" not-null="true"/>
+		<property name="preview"></property>
+		<!-- 映射集合属性，集合元素是其他持久化实体
+			指定连接表的表名-->	
+	</class>
+</hibernate-mapping>
