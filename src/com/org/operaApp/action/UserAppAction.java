@@ -41,16 +41,16 @@ public class UserAppAction extends ActionSupport {
 	 * 登录
 	 */
 	public void login(){
-			User user=userService.login(telephone, password);//根据电话和密码查�?
+			User user=userService.login(telephone, password);//根据电话和密码查找
 			if(user==null){
-				System.out.println("出错");
+				System.out.println("出错了");
 				
 				resp.setStatus(404);
 			}else{
 				this.user=user;
 			//	System.out.println(this.user);
 				System.out.println("登录成功");
-				System.out.println("成功");
+				System.out.println("成功了");
 				ResponseUtil.writeToResp(resp,new Gson().toJson(this.user));
 				resp.setStatus(200);
 			}
@@ -63,12 +63,12 @@ public class UserAppAction extends ActionSupport {
 			User user=userService.check(telephone);
 			System.out.println("注册信息");
 			if(user==null){
-				System.out.println("还未注册");
+				System.out.println("还未注册的");
 				user=new User();
 				user.setTel(telephone);
 				user.setPassword(password);
 				userService.save(user);
-			//	this.status="1";//还未注册�?
+			//	this.status="1";//还未注册的
 				//this.user =null;
 				
 				resp.setStatus(200);
@@ -98,7 +98,7 @@ public class UserAppAction extends ActionSupport {
 	public void forgotpwd(){
 		User user=userService.check(telephone);
 		if(user==null){
-			resp.setStatus(404);//没有注册�?
+			resp.setStatus(404);//没有注册过
 		}else{
 			user.setPassword(password);//重新修改密码
 			userService.save(user);
@@ -109,7 +109,7 @@ public class UserAppAction extends ActionSupport {
 	 * 修改个人信息
 	 */
 	public void memInfo(){
-		System.out.print("运行到这");		
+		System.out.print("运行到这里");		
 		User u=null;
 			try {
 			//	System.out.println("进入try方法");
@@ -128,7 +128,7 @@ public class UserAppAction extends ActionSupport {
 						new DateMorpher(new String[] {"yyyy-MM-dd","yyyy-MM-dd HH:mm:ss"}) );
 				u=(User)JSONObject.toBean(jsonUser, User.class);*/
 			} catch (Exception e) {
-				// TODO 自动生成�?catch �?
+				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 		}finally{
 		if(u!=null){
@@ -142,7 +142,7 @@ public class UserAppAction extends ActionSupport {
 		}
 	}
 	/**
-	 * 升级普�?用户为高级用�?
+	 * 升级普通用户为高级用户
 	 */
 	public void upGrade(){
 		Gson gson=new Gson();
@@ -155,7 +155,7 @@ public class UserAppAction extends ActionSupport {
 			String userObject=new String(new String(obj).getBytes("iso-8859-1"),"utf-8");
 			v=gson.fromJson(userObject, Vip.class);
 		} catch (Exception e) {
-			// TODO 自动生成�?catch �?
+			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
 		if(v!=null){

@@ -1,6 +1,5 @@
 package com.org.operaApp.action;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.org.opera.domain.Song;
+import com.org.opera.service.FileLogService;
 import com.org.opera.service.SongService;
+import com.org.opera.util.FileServer;
+import com.org.opera.util.SongServer;
 import com.org.opera.util.StreamTool;
 
 @Controller
@@ -28,48 +30,28 @@ public class SongAppAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	@Resource
 	private SongService songService;
+	@Resource
+	private FileLogService fileLogService;
+	private String song;
 	private List<Song> songList=new ArrayList<Song>();
 	private int start=0;
 	private int num=8;
-	
+	HttpServletRequest req=ServletActionContext.getRequest();
+	HttpServletResponse resp=ServletActionContext.getResponse();
 	/**
+	 * /**
+	 * 使用Struts2自带的json类型，详情可看Struts.xml。推荐使用gson格式，
+	 * 不过因为是较早之前的代码，就不修改了。相同的情况还有VideoAPPAction。
+	 * 上传方法在InitListener监听器
+	 * @return
+	 * @throws Exception
 	 * 返回请求的song数据
 	 */
 	public String list(){
 		songList=songService.findAll(start, num);
-	//	System.out.print("zheyang"+start+"�?+num+songList);
 		return SUCCESS;
-	}
-	
-	public void addSong(){
-		HttpServletRequest req=ServletActionContext.getRequest();
-		HttpServletResponse resp=ServletActionContext.getResponse();
-		ObjectMapper mapper=new ObjectMapper();
-		String song=req.getParameter("song");
-		Song songObject=null;
-		try {
-			 songObject=mapper.readValue(song, Song.class);
-		} catch (Exception e) {
-			// TODO 自动生成�?catch �?
-			e.printStackTrace();
-		}
-		if(songObject!=null){
-			try {
-				InputStream input=req.getInputStream();
-				String savePath=ServletActionContext.getServletContext()
-						.getRealPath("/upload/song").replace("\\", "/");
-				StreamTool.readStream(input, savePath);
-			} catch (Exception e) {
-				// TODO 自动生成�?catch �?
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-	
-	
-	
+	}			
+	//上传方法在InitListener监听器
 	//添加set,get方法
 	public List<Song> getSongList() {
 		return songList;
@@ -89,4 +71,13 @@ public class SongAppAction extends ActionSupport {
 	public void setNum(int num) {
 		this.num = num;
 	}
+
+	public String getSong() {
+		return song;
+	}
+
+	public void setSong(String song) {
+		this.song = song;
+	}
+	
 }

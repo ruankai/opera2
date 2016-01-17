@@ -24,13 +24,15 @@ public class FileUpload{
 	}
 
 	// 重写上传文件名，用当前时间+3位随机数构成无重复的文件名
-	public String getNewFileName(String uploadFileName, String ip) {
+	public  String getNewFileName(String uploadFileName, String ip) {
 		this.uploadName=new IPTimeStamp(ip).getIPTimeStampRand() +uploadFileName
 				.substring(uploadFileName.lastIndexOf("."),
 				uploadFileName.length());
 		//取得上传文件的后缀名
 		return this.uploadName;
 	}
+	
+
 	//path由getNewFileName方法算的
 	public void uploadFile(String path) throws Exception {
 	//	System.out.println(getSavePath() + "\\" +	getNewFileName(uploadFileName,ip));

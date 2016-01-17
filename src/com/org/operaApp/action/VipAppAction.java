@@ -32,7 +32,7 @@ public class VipAppAction extends ActionSupport {
 	 */
 	public void login()throws Exception{
 		System.out.println(tel+","+password);		
-			Vip vip=vipService.login(tel, password);//根据电话和密码查�?
+			Vip vip=vipService.login(tel, password);//根据电话和密码查找
 			if(vip==null){
 				resp.setStatus(404);
 			}else{
@@ -52,7 +52,7 @@ public class VipAppAction extends ActionSupport {
 				vip.setPassword(password);
 				vipService.save(vip);
 				resp.setStatus(200);
-				ResponseUtil.writeToResp(resp, "1");//没有注册�?
+				ResponseUtil.writeToResp(resp, "1");//没有注册过
 			}else{
 				resp.setStatus(200);
 				ResponseUtil.writeToResp(resp, "0");//已注册过
@@ -64,7 +64,7 @@ public class VipAppAction extends ActionSupport {
 	public void forgotpwd(){
 		Vip vip=vipService.check(tel);
 		if(vip==null){
-			resp.setStatus(400);//没有注册�?
+			resp.setStatus(400);//没有注册过
 		}else{
 			vip.setPassword(password);//重新修改密码
 			vipService.save(vip);
@@ -81,7 +81,7 @@ public class VipAppAction extends ActionSupport {
 			String vipObject=new String(obj.getBytes("iso-8859-1"),"utf-8");
 			vip=gson.fromJson(vipObject,Vip.class);
 		} catch (Exception e) {
-			// TODO 自动生成�?catch �?
+			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 		if(vip!=null){
