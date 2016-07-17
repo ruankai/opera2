@@ -67,6 +67,7 @@ public class CourseAction extends BaseAction<Course> {
 	}
 	
 	public String search() throws Exception{
+		System.out.println("testForGit")
 		String name = model.getName();
 		List<Course> courseList = CourseService.getByName(name);
 		System.out.println(courseList+"!!!!!!!!!!!!!!!!!");
