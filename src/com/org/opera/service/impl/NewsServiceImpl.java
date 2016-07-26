@@ -42,9 +42,9 @@ public class NewsServiceImpl extends DaoSupportImpl<News> implements
 
 	public List<News> getByTitle(String title) {
 		
-		String hql = "from News n where n.title like ?";
+		String hql = "from News n where n.title=?";
 		
-		return getSession().createQuery(hql).setParameter(0, "%"+title+"%").list();
+		return getSession().createQuery(hql).setParameter(0, title).list();
 	}
 
 	public List<News> queryById1() {

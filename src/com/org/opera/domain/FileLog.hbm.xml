@@ -11,13 +11,5 @@
 		</id>
 		<!-- 用于映射普通属性 -->
 		<property name="path" type="java.lang.String" not-null="true"/>
-		<property name="initiateName" type="java.lang.String" not-null="true"/>
-		<property name="uploadName" type="java.lang.String" not-null="true"/>
-		<property name="description"></property>
-		<property name="copyright"></property>
-		<property name="size"></property>
-		<property name="sourceId"></property>
-		<property name="position" not-null="true"></property>
-		<property name="photographer" not-null="true"></property>
 	</class>
 </hibernate-mapping>

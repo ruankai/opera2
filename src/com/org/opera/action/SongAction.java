@@ -63,8 +63,8 @@ public class SongAction extends BaseAction<Song> {
 			song.setFormat(uploadContentType);
 			song.setSize(upload.length());
 			song.setInitiateName(uploadFileName);
-		//	String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
-			String songName=songUpload.getNewFileName(uploadFileName, "127.0.0.1");
+			String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
+			String songName=songUpload.getNewFileName(uploadFileName, ip);
 			songUpload.uploadFile(songName);
 			song.setUploadName(songName);
 			song.setPath(songName);
@@ -74,7 +74,7 @@ public class SongAction extends BaseAction<Song> {
 		}
 		return "toList";
 	}
-	/**查看粤曲*/
+	/**查看"粤曲*/
 	public String show()throws Exception{
 		String path=model.getPath();
 		//rootPath 存放粤曲的文件夹路径

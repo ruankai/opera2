@@ -70,12 +70,4 @@ public interface DaoSupport<T> {
 	 */
 	PageBean2 getPageBean(int pageNum, int pageSize, QueryHelper queryHelper);
 	
-	/**
-	 * 
-	 * @param firstResult 开始的记录数
-	 * @param maxResult	取得的记录数
-	 * @return
-	 */
-	List<T> findAll(int firstResult,int maxResult);
-	
 }

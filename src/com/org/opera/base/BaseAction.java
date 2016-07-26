@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.org.opera.action.SongAction;
 import com.org.opera.domain.User;
-import com.org.opera.service.CourseService;
 import com.org.opera.service.ForumService;
 import com.org.opera.service.ManagerService;
 import com.org.opera.service.MinrenInfoService;
@@ -28,7 +28,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 
 	private static final long serialVersionUID = 1L;
 
-	/*==========================ModelDriven<T>锟斤拷支锟斤拷==============================*/
+	/*==========================ModelDriven<T>��֧��==============================*/
 	
 	protected T model;
 	
@@ -36,11 +36,11 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	public BaseAction() {
 	
 		try {
-			//通锟斤拷锟斤拷锟饺�odel锟斤拷锟斤拷实锟斤拷锟斤拷
+			//ͨ�����ȡmodel����ʵ����
 			ParameterizedType pt = (ParameterizedType)this.getClass().getGenericSuperclass();
 			Class<T> clazz = (Class<T>) pt.getActualTypeArguments()[0];
 			
-			//通锟斤拷锟戒创锟斤拷model锟斤拷实锟斤拷
+			//ͨ���䴴��model��ʵ��
 			model = clazz.newInstance();
 		}
 		catch (Exception e) {
@@ -53,7 +53,7 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 		return model;
 	}
 	
-	/*=============================Service锟斤拷锟斤拷锟斤拷实锟斤拷===============================*/
+	/*=============================Service������ʵ��===============================*/
 	
 	@Resource
 	protected UserService userService;
@@ -90,12 +90,10 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	protected SihuojuJoinService SihuojuJoinService;
 	@Resource
 	protected MinrenInfoService MinrenInfoService;
-	@Resource
-	protected CourseService CourseService;
 	/*=========================================*/
 	
 	/**
-	 * �峰�褰���诲������
+	 * 获取当前登录的用户
 	 * 
 	 * @return
 	 */
@@ -103,10 +101,10 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 		return (User) ActionContext.getContext().getSession().get("user");
 	}
 	
-	// ============== ��〉�ㄧ���� =============
+	// ============== 分页用的参数 =============
 
-		protected int pageNum = 1; // 褰��椤�
-		protected int pageSize = 10; // 姣�〉�剧ず澶���¤�褰�
+		protected int pageNum = 1; // 当前页
+		protected int pageSize = 10; // 每页显示多少条记录
 
 		public int getPageNum() {
 			return pageNum;

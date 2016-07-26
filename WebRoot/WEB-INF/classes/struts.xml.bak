@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<!-- 配置为开发模式（配置了开发模式，不需要重新发布，立即生效） -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 把扩展名配置为action -->
+    <constant name="struts.action.extension" value="action"></constant>
+	<!-- 把主题配置为simple(设置为自己的主题，比如：表单不会自动的生成为表格的形式) -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 国际化文件 -->
+	<constant name="struts.custom.i18n.resources" value="mess"/>
+	<!-- 视频、音频和照片允许上传的大小 -->
+	<constant name="struts.multipart.maxSize" value="1000000000"/> 
+
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- 用户管理 -->
+    	<action name="user-*" class="userAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/user-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	<!-- VIP管理 -->
+    	<action name="vip-*" class="vipAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/vip-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	<!-- 管理员管理 -->
+    	<action name="manager-*" class="managerAction" method="{1}">
+        	<result name="loginError">/WEB-INF/jsp/public/login.jsp</result>
+        	<result name="loginSuccess">/WEB-INF/jsp/public/mainpage.jsp</result>
+        	<result name="{1}">/WEB-INF/jsp/uservipmanagerAction/manager-{1}.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<result name="saveUI">/WEB-INF/jsp/uservipmanagerAction/manager-saveUI.jsp</result>
+        	<result name="toList" type="redirectAction">/manager-listpart?pageNow=${pageNow}</result>
+    		<result name="updatepwd">/WEB-INF/jsp/uservipmanagerAction/manager-updatepwd.jsp</result>
+    		<result name="updatePwdSuccess">/WEB-INF/jsp/public/mainpage.jsp</result>
+    		<result name="updatePwdError">/WEB-INF/jsp/uservipmanagerAction/manager-updatepwd.jsp</result>
+    		<result name="toLogin">/WEB-INF/jsp/public/login.jsp</result>
+    	</action>
+    	
+    	<!-- 新闻管理 -->
+    	<action name="news_*" class="newsAction" method="{1}">
+    		<result name="{1}">/WEB-INF/jsp/newsAction/news_{1}.jsp</result>
+    		<!-- <result name="toIndex" type="redirect">/index.jsp</result>
+    		<result name="toNewsList" type="redirectAction">/news_showMore</result>
+    		<result name="show">/WEB-INF/jsp/newsAction/news_show.jsp</result>
+    		<result name="showText">/WEB-INF/jsp/newsAction/news_show.jsp</result>
+    		<result name="show1">/index.jsp</result> -->
+    		<result name="toList" type="redirectAction">/news_listNewsBack?pageNow=${pageNow}</result>
+    		<result name="saveUI">/WEB-INF/jsp/newsAction/news_saveUI.jsp</result>
+    		<result type="stream" name="ajax-success">
+        		<param name="contentType">text/html</param>
+        		<param name="inputName">inputStream</param>
+        	</result>
+    	</action>
+    	
+    	<!-- 文档管理 -->
+    	<action name="text_*" class="textAction" method="{1}">
+			<result name="{1}">/WEB-INF/jsp/textAction/{1}.jsp</result>
+			<result name="input">/WEB-INF/jsp/textAction/addUI.jsp</result>
+			<result name="toList" type="redirectAction">text_list?currentPage=${currentPage}</result>
+        </action>
+        
+        <!-- 照片管理 -->
+        	<action name="photo_*" class="photoAction" method="{1}">
+			<!-- 配置fileUpload的拦截器 -->
+			<interceptor-ref name="fileUpload">
+				<!-- 配置允许上传的文件类型 -->
+				<param name="allowedTypes">
+				image/png,image/gif,image/jpeg
+				</param>
+				<!-- 配置允许上传的文件大小 -->
+				<param name="maximumSize">5*1024*1024</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
+			<param name="savePath">/upload/photo</param>
+			<result name="{1}">/WEB-INF/jsp/photoAction/{1}.jsp</result>
+			<result name="toList" type="redirectAction">photo_list</result>
+        	<result name="addUI">/WEB-INF/jsp/photoAction/addUI.jsp</result>
+        	<result name="editUI">/WEB-INF/jsp/photoAction/editUI.jsp</result>
+        	<result name="input">//WEB-INF/jsp/photoAction/addUI.jsp</result>
+        </action>
+        
+        <action name="song_*" class="songAction" method="{1}">
+        	<!-- <interceptor-ref name="fileUpload">
+        		配置允许上传的文件类型
+        		<param name=""></param>
+        	</interceptor-ref> -->
+        	<param name="savePath">/upload/song</param>
+        	<result name="{1}">/WEB-INF/jsp/songAction/{1}.jsp</result>
+        	<result name="toList" type="redirectAction">song_list</result>
+        	<result name="addUI">/WEB-INF/jsp/songAction/addUI.jsp</result>
+        	<result name="editUI">/WEB-INF/jsp/songAction/editUI.jsp</result>
+        	<result name="input">//WEB-INF/jsp/songAction/addUI.jsp</result>
+        </action>
+    	
+    	<action name="video_*" class="videoAction" method="{1}">
+        	<!-- <interceptor-ref name="fileUpload">
+        		配置允许上传的文件类型
+        		<param name=""></param>
+        	</interceptor-ref> -->
+        	<param name="savePath">/upload/video</param>
+        	<result name="{1}">/WEB-INF/jsp/videoAction/{1}.jsp</result>
+        	<result name="toList" type="redirectAction">video_list</result>
+        	<result name="addUI">/WEB-INF/jsp/videoAction/addUI.jsp</result>
+        	<result name="editUI">/WEB-INF/jsp/videoAction/editUI.jsp</result>
+        	<result name="input">//WEB-INF/jsp/videoAction/addUI.jsp</result>
+        </action>
+    	
+    </package>
+
+</struts>

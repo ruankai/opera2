@@ -37,7 +37,7 @@
 		<property name="tel" type="java.lang.String">
 			<column name="tel" length="32"></column>
 		</property>
-		<property name="oftenTel"></property>
+		
 		<property name="email" type="java.lang.String">
 			<column name="email" length="32"></column>
 		</property>

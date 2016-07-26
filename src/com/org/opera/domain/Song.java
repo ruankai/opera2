@@ -21,7 +21,6 @@ public class Song implements Serializable {
 	private String description;//音频描述
 	private String singer;//演唱者
 	private String path;//音频的保存路径
-	private String photo;//音频图片
 	public Long getSongId() {
 		return songId;
 	}
@@ -93,12 +92,6 @@ public class Song implements Serializable {
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 	
 }

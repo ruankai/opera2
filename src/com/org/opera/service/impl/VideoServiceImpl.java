@@ -22,5 +22,5 @@ public class VideoServiceImpl extends DaoSupportImpl<Video> implements VideoServ
 				.uniqueResult();
 		return new PageBean(currentPage, pageSize,count.intValue(),list);
 	}
-	
+
 }

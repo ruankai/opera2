@@ -18,12 +18,6 @@
 		<property name="text" type="java.lang.String">
 			<column name="text" length="2048"></column>
 		</property>
-		<property name="type" type="java.lang.String">
-            <column name="type" length="32" />
-        </property>
-        <property name="time" type="java.sql.Timestamp">
-            <column name="time"  />
-        </property>
 		
 	</class>
 	

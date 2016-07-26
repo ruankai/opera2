@@ -39,8 +39,6 @@
 	<mapping resource="com/org/opera/domain/User.hbm.xml" />
 	<mapping resource="com/org/opera/domain/Video.hbm.xml" />
 	<mapping resource="com/org/opera/domain/Vip.hbm.xml" />
-	<mapping resource="com/org/opera/domain/OtherPhoto.hbm.xml" />
-	<mapping resource="com/org/opera/domain/Course.hbm.xml" />
 
 
 </session-factory>

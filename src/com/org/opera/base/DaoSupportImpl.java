@@ -33,7 +33,7 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
 
 		this.clazz = (Class) pt.getActualTypeArguments()[0];
 
-		System.out.println("clazz = " + clazz.getName());
+//		System.out.println("clazz = " + clazz.getName());
 	}
 
 	/**
@@ -62,7 +62,8 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
 
 		if (id == null) {
 			return null;
-		} else {
+		}
+		else {
 			return (T) getSession().get(clazz, id);
 		}
 	}
@@ -72,12 +73,11 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
 		if (ids == null || ids.length == 0) {
 
 			return Collections.EMPTY_LIST;
-		} else {
+		}
+		else {
 
-			return getSession()
-					.createQuery(
-							"from " + clazz.getSimpleName()
-									+ " where id in (:ids)")
+			return getSession().createQuery(
+					"from " + clazz.getSimpleName() + " where id in (:ids)")
 					.setParameterList("ids", ids).list();
 		}
 	}
@@ -93,71 +93,60 @@ public class DaoSupportImpl<T> implements DaoSupport<T> {
 	}
 
 	// 公共的查询分页信息的方法
-	@Deprecated
-	public PageBean2 getPageBean(int pageNum, int pageSize, String hql,
-			List<Object> parameters) {
-		System.out.println("-------> DaoSupportImpl.getPageBean()");
+			@Deprecated
+			public PageBean2 getPageBean(int pageNum, int pageSize, String hql, List<Object> parameters) {
+				System.out.println("-------> DaoSupportImpl.getPageBean()");
 
-		// 查询本页的数据列表
-		Query listQuery = getSession().createQuery(hql); // 创建查询对象
-		if (parameters != null) { // 设置参数
-			for (int i = 0; i < parameters.size(); i++) {
-				listQuery.setParameter(i, parameters.get(i));
+				// 查询本页的数据列表
+				Query listQuery = getSession().createQuery(hql); // 创建查询对象
+				if (parameters != null) { // 设置参数
+					for (int i = 0; i < parameters.size(); i++) {
+						listQuery.setParameter(i, parameters.get(i));
+					}
+				}
+				listQuery.setFirstResult((pageNum - 1) * pageSize);
+				listQuery.setMaxResults(pageSize);
+				List list = listQuery.list(); // 执行查询
+
+				// 查询总记录数量
+				Query countQuery = getSession().createQuery("SELECT COUNT(*) " + hql);
+				if (parameters != null) { // 设置参数
+					for (int i = 0; i < parameters.size(); i++) {
+						countQuery.setParameter(i, parameters.get(i));
+					}
+				}
+				Long count = (Long) countQuery.uniqueResult(); // 执行查询
+
+				return new PageBean2(pageNum, pageSize, count.intValue(), list);
 			}
-		}
-		listQuery.setFirstResult((pageNum - 1) * pageSize);
-		listQuery.setMaxResults(pageSize);
-		List list = listQuery.list(); // 执行查询
 
-		// 查询总记录数量
-		Query countQuery = getSession().createQuery("SELECT COUNT(*) " + hql);
-		if (parameters != null) { // 设置参数
-			for (int i = 0; i < parameters.size(); i++) {
-				countQuery.setParameter(i, parameters.get(i));
+			// 公共的查询分页信息的方法（最终版）
+			public PageBean2 getPageBean(int pageNum, int pageSize, QueryHelper queryHelper) {
+				System.out.println("-------> DaoSupportImpl.getPageBean( int pageNum, int pageSize, QueryHelper queryHelper )");
+
+				// 参数列表
+				List<Object> parameters = queryHelper.getParameters();
+
+				// 查询本页的数据列表
+				Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // 创建查询对象
+				if (parameters != null) { // 设置参数
+					for (int i = 0; i < parameters.size(); i++) {
+						listQuery.setParameter(i, parameters.get(i));
+					}
+				}
+				listQuery.setFirstResult((pageNum - 1) * pageSize);
+				listQuery.setMaxResults(pageSize);
+				List list = listQuery.list(); // 执行查询
+
+				// 查询总记录数量
+				Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
+				if (parameters != null) { // 设置参数
+					for (int i = 0; i < parameters.size(); i++) {
+						countQuery.setParameter(i, parameters.get(i));
+					}
+				}
+				Long count = (Long) countQuery.uniqueResult(); // 执行查询
+
+				return new PageBean2(pageNum, pageSize, count.intValue(), list);
 			}
-		}
-		Long count = (Long) countQuery.uniqueResult(); // 执行查询
-
-		return new PageBean2(pageNum, pageSize, count.intValue(), list);
-	}
-
-	// 公共的查询分页信息的方法（最终版）
-	public PageBean2 getPageBean(int pageNum, int pageSize,
-			QueryHelper queryHelper) {
-		System.out
-				.println("-------> DaoSupportImpl.getPageBean( int pageNum, int pageSize, QueryHelper queryHelper )");
-
-		// 参数列表
-		List<Object> parameters = queryHelper.getParameters();
-
-		// 查询本页的数据列表
-		Query listQuery = getSession().createQuery(
-				queryHelper.getListQueryHql()); // 创建查询对象
-		if (parameters != null) { // 设置参数
-			for (int i = 0; i < parameters.size(); i++) {
-				listQuery.setParameter(i, parameters.get(i));
-			}
-		}
-		listQuery.setFirstResult((pageNum - 1) * pageSize);
-		listQuery.setMaxResults(pageSize);
-		List list = listQuery.list(); // 执行查询
-
-		// 查询总记录数量
-		Query countQuery = getSession().createQuery(
-				queryHelper.getCountQueryHql());
-		if (parameters != null) { // 设置参数
-			for (int i = 0; i < parameters.size(); i++) {
-				countQuery.setParameter(i, parameters.get(i));
-			}
-		}
-		Long count = (Long) countQuery.uniqueResult(); // 执行查询
-
-		return new PageBean2(pageNum, pageSize, count.intValue(), list);
-	}
-
-	public List<T> findAll(int firstResult, int maxResult) {
-		return getSession().createQuery(//
-				"FROM " + clazz.getSimpleName())//
-				.setFirstResult(firstResult).setMaxResults(maxResult).list();
-	}
 }

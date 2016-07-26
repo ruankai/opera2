@@ -76,8 +76,8 @@ public class VideoAction extends BaseAction<Video> {
 			video.setFormat(uploadContentType);
 			video.setSize(upload.length());
 			video.setInitiateName(uploadFileName);
-	//		String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
-			String videoName=videoUpload.getNewFileName(uploadFileName, "127.0.0.1");
+			String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
+			String videoName=videoUpload.getNewFileName(uploadFileName, ip);
 			videoUpload.uploadFile(videoName);
 			video.setUploadName(videoName);
 			video.setVideo(videoName);
@@ -106,6 +106,7 @@ public class VideoAction extends BaseAction<Video> {
 		return "toList";
 	}
 	/**显示视频的截图*/
+	
 	public String show()throws Exception{
 		String preview=model.getPreview();
 		String url=ServletActionContext.getServletContext().

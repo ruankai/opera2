@@ -38,10 +38,6 @@
 			<column name="tel" length="32"></column>
 		</property>
 		
-		<property name="oftenTel" type="java.lang.String">
-			<column name="oftenTel" length="32"></column>
-		</property>
-		
 		<property name="email" type="java.lang.String">
 			<column name="email" length="32"></column>
 		</property>

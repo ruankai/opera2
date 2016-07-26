@@ -83,20 +83,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    						<td><s:textfield label="标题" name="title"></s:textfield></td>
 		    					</tr>
 		    					<tr>
-		    						<td>类别：　</td>
-		    						<td><s:select label="最高学历" name="type" list="{'高中','大学','硕士','博士'}" headerKey="" headerValue="请选择类别"></s:select>
-		    					</tr>
-		    					
-		    				
-		    					<tr>
-		    						<td>类型：　</td>
-		    						<td><s:textfield label="类型" name="type"></s:textfield></td>
-		    					</tr>
-		    					<tr>
 		    						<td>内容：　</td>
 		    						<td><s:textarea label="内容" name="text" cssStyle="width:650px;height:200px;"></s:textarea></td>
 		    					</tr>
-		    				
 		    					<tr>
 		    						<td></td>
 		    						<td><s:submit value="确定" cssClass="issue"></s:submit></td>
@@ -118,7 +107,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    						<td>内容：　</td>
 		    						<td><s:textarea label="内容" name="text"></s:textarea></td>
 		    					</tr>
-		
 		    					<tr>
 		    						<td></td>
 		    						<td><s:submit value="确定" cssClass="edit"></s:submit></td>

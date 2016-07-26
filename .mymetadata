@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="opera2"
+  name="yueju1"
   id="myeclipse.1439343291719"
   context-root="/opera2"
   j2ee-spec="5.0"
-  archive="opera2.war">
+  archive="yueju1.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

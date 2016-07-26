@@ -22,6 +22,6 @@
 		<property name="uploadName" not-null="true"/>
 		<property name="preview"></property>
 		<!-- 映射集合属性，集合元素是其他持久化实体
-			指定连接表的表名-->	
+			指定连接表的表名-->
 	</class>
 </hibernate-mapping>

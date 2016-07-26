@@ -38,8 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<table border="0" cellpadding="5" cellspacing="1">
 					<s:iterator value="#news">
 						<tr>
-							
-							<td>${text}</td>
+							<td>${text }</td>
 						</tr>
 					</s:iterator>
 				</table>

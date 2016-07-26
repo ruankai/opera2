@@ -9,17 +9,17 @@ public class Video implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long videoId;			
-	private Date  date;//上传时间
-	private String photographer;//拍摄者
-	private String  copyright;//版权所属
-	private String format;//格式
-	private Long  size;//大小
-	private String initiateName;//视频原来的名称
-	private String  uploadName;//上传后的名称
-	private String keyword;//关键词
+	private Date  date;
+	private String photographer;
+	private String  copyright;
+	private String format;
+	private Long  size;
+	private String initiateName;
+	private String  uploadName;
+	private String keyword;
 	private String description;
 	private String video;//视频保存路径
-	private String preview;//视频预览图路径
+	private String preview;//视频预览图
 	public Long getVideoId() {
 		return videoId;
 	}

@@ -39,25 +39,24 @@ public class UserSerciveImpl extends DaoSupportImpl<User> implements UserService
 
 	public List<User> queryByTrueName(String trueName) {
 		
-		String hql = "from User u where u.trueName like ?";
+		String hql = "from User u where u.trueName=?";
 		
-		return getSession().createQuery(hql).setString(0, "%"+trueName+"%").list();
+		return getSession().createQuery(hql).setString(0, trueName).list();
 	}
 
 	public User login(String tel, String password) {
-		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
+		// TODO 自动生成的方法存根
 		String hql= "from User u where u.tel=? and u.password=?";
 		return (User)getSession().createQuery(hql).setString(0, tel)
 				.setString(1,password).uniqueResult();
 	}
 
 	public User check(String tel) {
-		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
+		// TODO 自动生成的方法存根
 		String hql= "from User u where u.tel=?";
 		return (User)getSession().createQuery(hql).setString(0, tel)
 				.uniqueResult();
 	}
-	@Transactional(rollbackFor=Exception.class) 
 	public void upGrade(Long id,Vip vip){
 		delete(id);
 		getSession().save(vip);

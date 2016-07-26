@@ -38,20 +38,20 @@ public class VipServiceImpl extends DaoSupportImpl<Vip> implements VipService {
 
 	public List<Vip> queryByTrueName(String trueName) {
 
-		String hql = "from Vip v where v.trueName like ?";
+		String hql = "from Vip v where v.trueName=?";
 		
-		return getSession().createQuery(hql).setString(0, "%"+trueName+"%").list();
+		return getSession().createQuery(hql).setString(0, trueName).list();
 	}
 
 	public Vip login(String tel, String password) {
-		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
-		String hql="from Vip v where v.tel=? and v.password=?";
+		// TODO 自动生成的方法存根
+		String hql="from Vip v where v.tel=? where v.password=?";
 		return (Vip)getSession().createQuery(hql).setString(0, tel)
 				.setString(1, password).uniqueResult();
 	}
 
 	public Vip check(String tel) {
-		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
+		// TODO 自动生成的方法存根
 		String hql="from Vip v where v.tel=?";
 		return (Vip)getSession().createQuery(hql).setString(0, tel)
 				.uniqueResult();

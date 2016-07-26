@@ -6,13 +6,13 @@ import java.util.Set;
 
 
 /**
- * 绉佷紮灞�椿鍔ㄤ俊鎭�
+ * 私伙局活动信息
  * 
  * @author tyg
  * 
  */
 public class SihuojuInfo {
-	//id	name	place	firstTime	userId(鍙戣捣浜�	description	type	count(鐐瑰嚮鍙傚姞鐨勪汉鏁�
+	//id	name	place	firstTime	userId(发起人)	description	type	count(点击参加的人数)
 	
 	private Long id;
 	private String name;
@@ -22,8 +22,8 @@ public class SihuojuInfo {
 	private int type;
 	private int count;
 	//------------------------
-	private User user;//user灞炴�锛屾湰绫讳笌User澶氬涓�
-	private Set<SihuojuJoin> joins = new HashSet<SihuojuJoin>();//joins灞炴�锛屾湰绫讳笌SihuojuJoin鐨勪竴瀵瑰
+	private User user;//user属性，本类与User多对一
+	private Set<SihuojuJoin> joins = new HashSet<SihuojuJoin>();//joins属性，本类与SihuojuJoin的一对多
 	
 
 	public Set<SihuojuJoin> getJoins() {

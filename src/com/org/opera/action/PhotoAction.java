@@ -14,32 +14,32 @@ import com.org.opera.util.FileUpload;
 @Controller
 @Scope("prototype")
 public class PhotoAction extends BaseAction<Photo> {
-	//分页属性
+	//鍒嗛〉灞炴�
 	private int currentPage=1;
 	private int pageSize=9;
-	//上传属性
-	private File upload;//封装上传文件域的属性
-	private String uploadContentType;//封装上传文件类型的属性，upload是表单定义文件域 name属性值
-	private String uploadFileName;//封装上传文件名的属性
-	private String savePath;//保存路径，在struts.xml文件中配置的属性
+	//涓婁紶灞炴�
+	private File upload;//灏佽涓婁紶鏂囦欢鍩熺殑灞炴�
+	private String uploadContentType;//灏佽涓婁紶鏂囦欢绫诲瀷鐨勫睘鎬э紝upload鏄〃鍗曞畾涔夋枃浠跺煙 name灞炴�鍊�
+	private String uploadFileName;//灏佽涓婁紶鏂囦欢鍚嶇殑灞炴�
+	private String savePath;//淇濆瓨璺緞锛屽湪struts.xml鏂囦欢涓厤缃殑灞炴�
 	public String list() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		PageBean pageBean=photoService.getPageBean(currentPage, pageSize);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "list";
 	}
 	public String addUI() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		return "addUI";
 	}
 	public String editUI() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		Photo photo=photoService.getById(model.getPhotoId());
 		ActionContext.getContext().getValueStack().push(photo);
 		return "editUI";
 	}
 	public String edit() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		Photo photo=photoService.getById(model.getPhotoId());
 		photo.setCopyright(model.getCopyright());
 		photo.setKeyword(model.getKeyword());
@@ -47,23 +47,23 @@ public class PhotoAction extends BaseAction<Photo> {
 		photo.setPhotographer(model.getPhotographer());
 		if(getUpload()!=null){
 			try {
-				//初始化photoUpload，准备上传
+				//鍒濆鍖杙hotoUpload锛屽噯澶囦笂浼�
 				FileUpload photoUpload=new FileUpload(savePath,upload);
-				String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
-				//设置图片上传的最终名称
+				String ip=ServletActionContext.getRequest().getRemoteAddr();//鍙栧緱ip;
+				//璁剧疆鍥剧墖涓婁紶鐨勬渶缁堝悕绉�
 				String photoName=photoUpload.getNewFileName(getUploadFileName(),ip);		
-				photoUpload.uploadFile(photoName);//上传图片
-				//图片的路径，也是名称
+				photoUpload.uploadFile(photoName);//涓婁紶鍥剧墖
+				//鍥剧墖鐨勮矾寰勶紝涔熸槸鍚嶇О
 				photo.setPhoto(photoName);
-				photo.setSize(upload.length());//上传文件的大小
+				photo.setSize(upload.length());//涓婁紶鏂囦欢鐨勫ぇ灏�
 				photo.setInitiateName(getUploadFileName());
-				photo.setDate(new Date());//更改上传图片的时间
-				photo.setType(getUploadContentType());//上传图片的类型
-				//取得旧的图片的路径
+				photo.setDate(new Date());//鏇存敼涓婁紶鍥剧墖鐨勬椂闂�
+				photo.setType(getUploadContentType());//涓婁紶鍥剧墖鐨勭被鍨�
+				//鍙栧緱鏃х殑鍥剧墖鐨勮矾寰�
 				String filePath=ServletActionContext.getServletContext()
 						.getRealPath(savePath)+java.io.File.separator
 						+photo.getUploadName();
-				//上传后的名称,必须先取得旧图片的路径
+				//涓婁紶鍚庣殑鍚嶇О,蹇呴』鍏堝彇寰楁棫鍥剧墖鐨勮矾寰�
 				photo.setUploadName(photoName);
 				File f=new File(filePath);
 				if(f.exists()){
@@ -72,7 +72,7 @@ public class PhotoAction extends BaseAction<Photo> {
 				photoService.update(photo);
 				return "toList";
 			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
+				// TODO 鑷姩鐢熸垚鐨�catch 鍧�
 				throw e;
 			}
 		}else{
@@ -81,7 +81,7 @@ public class PhotoAction extends BaseAction<Photo> {
 		return "toList";
 	}
 	public String show() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		Photo photo=photoService.getById(model.getPhotoId());
 		String url=ServletActionContext.getServletContext().
 				getContextPath()+savePath+"/"+photo.getPhoto();
@@ -90,7 +90,7 @@ public class PhotoAction extends BaseAction<Photo> {
 		return "show";
 	}	
 	public String add() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		Photo photo=new Photo();
 		FileUpload photoUpload=new FileUpload(savePath,upload);
 		photo.setCopyright(model.getCopyright());
@@ -98,33 +98,33 @@ public class PhotoAction extends BaseAction<Photo> {
 		photo.setDescription(model.getDescription());
 		photo.setPhotographer(model.getPhotographer());
 		photo.setDate(new Date());		
-		//String ip=ServletActionContext.getRequest().getRemoteAddr();//取得ip;
+		String ip=ServletActionContext.getRequest().getRemoteAddr();//鍙栧緱ip;
 		if(getUpload()!=null){
 			try {
-				//设置图片上传的最终名称
-				String photoName=photoUpload.getNewFileName(getUploadFileName(),"127.0.0.1");
+				//璁剧疆鍥剧墖涓婁紶鐨勬渶缁堝悕绉�
+				String photoName=photoUpload.getNewFileName(getUploadFileName(),ip);
 				photo.setPhoto(photoName);
-				photo.setInitiateName(getUploadFileName());//上传图片的原始名称
-				photo.setType(getUploadContentType());//上传图片的类型
-				photo.setSize(upload.length());//上传文件的大小
-				//上传后的名称
+				photo.setInitiateName(getUploadFileName());//涓婁紶鍥剧墖鐨勫師濮嬪悕绉�
+				photo.setType(getUploadContentType());//涓婁紶鍥剧墖鐨勭被鍨�
+				photo.setSize(upload.length());//涓婁紶鏂囦欢鐨勫ぇ灏�
+				//涓婁紶鍚庣殑鍚嶇О
 				photo.setUploadName(photoName);
-				photoUpload.uploadFile(photoName);//上传图片
+				photoUpload.uploadFile(photoName);//涓婁紶鍥剧墖
 				photoService.save(photo);
 				return "toList";
 			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
+				// TODO 鑷姩鐢熸垚鐨�catch 鍧�
 				throw e;
 			}
 		}else{
 		//	System.out.print(this.getUpload());
-			addFieldError("null","请选择要上传的图片");
+			addFieldError("null","璇烽�鎷╄涓婁紶鐨勫浘鐗�");
 			return "addUI";
 		}
 		//
 	}
 	public String delete() throws Exception {
-		// TODO 自动生成的方法存根
+		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
 		try{
 		photoService.delete(model.getPhotoId());
 		String filePath=ServletActionContext.getServletContext()
@@ -140,7 +140,7 @@ public class PhotoAction extends BaseAction<Photo> {
 		}
 		return "toList";
 	}
-//添加get和set方法
+//娣诲姞get鍜宻et鏂规硶
 	public int getCurrentPage() {
 		return currentPage;
 	}

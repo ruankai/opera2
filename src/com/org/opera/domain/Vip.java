@@ -12,7 +12,6 @@ public class Vip {
 	private Date birthday;
 	private String place;
 	private String tel;
-	private String oftenTel;
 	private String email;
 	private String wechat;
 	private String qq;
@@ -247,14 +246,6 @@ public class Vip {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getOftenTel() {
-		return oftenTel;
-	}
-
-	public void setOftenTel(String oftenTel) {
-		this.oftenTel = oftenTel;
 	}
 
 	@Override

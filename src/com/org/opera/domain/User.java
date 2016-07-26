@@ -16,8 +16,7 @@ public class User implements Serializable{
 	private String gender;
 	private Date birthday;
 	private String place;
-	private String tel;//注册时的电话
-	private String oftenTel;//常用电话
+	private String tel;
 	private String email;
 	private String wechat;
 	private String qq;
@@ -122,14 +121,6 @@ public class User implements Serializable{
 
 	public void setWechat(String wechat) {
 		this.wechat = wechat;
-	}
-
-	public String getOftenTel() {
-		return oftenTel;
-	}
-
-	public void setOftenTel(String oftenTel) {
-		this.oftenTel = oftenTel;
 	}
 
 	public String getQq() {

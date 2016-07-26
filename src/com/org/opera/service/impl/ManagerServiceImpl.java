@@ -46,9 +46,9 @@ public class ManagerServiceImpl extends DaoSupportImpl<Manager> implements Manag
 
 	public List<Manager> queryByTrueName(String trueName) {
 		
-		String hql = "from Manager m where m.trueName like?";
+		String hql = "from Manager m where m.trueName=?";
 		
-		return getSession().createQuery(hql).setString(0, "%"+trueName+"%").list();
+		return getSession().createQuery(hql).setString(0, trueName).list();
 	}
 
 	public int updatePwd(String userName, String managerPwd, String newPwd) {

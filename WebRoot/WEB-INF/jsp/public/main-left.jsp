@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</li>
 			<li>
 				<div>
-					<a href="${pageContext.request.contextPath }/course_listBack.action">微课程管理</a>
+					<a href="${pageContext.request.contextPath }/user-listpart.action">微课程管理</a>
 				</div>
 			</li>
 			<li>
